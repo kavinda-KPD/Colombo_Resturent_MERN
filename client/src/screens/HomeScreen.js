@@ -13,6 +13,9 @@ export default function HomeScreen() {
     dispatch(getAllFoods());
   }, []);
 
+  console.log(foods);
+
+
   return (
     <div>
       <div className="row justify-content-center">

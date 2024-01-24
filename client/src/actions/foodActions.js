@@ -11,6 +11,4 @@ export const getAllFoods = () => async dispatch => {
     } catch (error) {
         dispatch({type:'GET_FOOD_FAILED',payload:error});
     }
-
-
 }

@@ -17,6 +17,14 @@ export default function CartScreen() {
     }
  }
 
+ function clearCart(){
+  // Delete all local storage data
+  localStorage.clear();
+
+  // Redirect to the "home" page
+  window.location.href = "/";
+}
+
  return (
     <div>
       <div className="row justify-content-center">
@@ -48,6 +56,11 @@ export default function CartScreen() {
         <div className="col-md -4">
         <button className="btn" onClick={sendToKichen}>
             Send To Kichen
+          </button>
+        </div>
+        <div className="col-md -4">
+        <button className="btn" onClick={clearCart}>
+            Clear Cart
           </button>
         </div>
       </div>

@@ -10,6 +10,7 @@ import {
 } from "react-router-dom";
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
+import OrderScreen from "./screens/OrderScreen";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" exact Component={HomeScreen} />
           <Route path="/cart" exact Component={CartScreen} />
+          <Route path="/orders" exact Component={OrderScreen} />
         </Routes>
       </BrowserRouter>
     </div>

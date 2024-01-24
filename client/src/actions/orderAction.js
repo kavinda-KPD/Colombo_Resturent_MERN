@@ -17,3 +17,16 @@ export const placeOrder = () => async (dispatch,getState) => {
         console.log(error);
     }
 }
+
+export const getAllOrders = () => async dispatch => {
+
+    dispatch({type:'GET_ORDERS_REQUEST'});
+
+    try {
+        const response = await axios.get('/api/orders/getallorders');
+        // console.log(response);
+        dispatch({type:'GET_ORDERS_SUCCESS',payload:response.data});
+    } catch (error) {
+        dispatch({type:'GET_ORDERS_FAILED',payload:error});
+    }
+}
