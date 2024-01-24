@@ -1,9 +1,15 @@
 const express = require("express");
+const cors = require("cors")
 const app = express();
 const db = require('./db')
 const Food = require('./models/foodModel')
 
 app.use(express.json());
+
+app.use(cors());
+
+const foodsRoute = require('./routes/foodRoute');
+app.use('/api/foods/',foodsRoute);
 
 app.get("/", (req, res) => {
     res.send("Server Working");

@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-export const getAllFoods = () => dispatch => {
+export const getAllFoods = () => async dispatch => {
 
     dispatch({type:'GET_FOOD_REQUEST'});
 
     try {
-        const response = axios.get('/api/foods/getfoods');
+        const response = await axios.get('/api/foods/getallfoods');
         console.log(response);
         dispatch({type:'GET_FOOD_SUCCESS',payload:response.data});
     } catch (error) {
