@@ -30,4 +30,71 @@ router.get('/getallorders',async(req,res) =>{
     }
 })
 
+
+router.get('/getfamousfood', async (req, res) => {
+    try {
+        const mostSoldMainDish = await orderModel.aggregate([
+            { $unwind: '$orderItems' },
+            { $match: { 'orderItems.category': 'Main' } },
+            {
+                $group: {
+                    _id: '$orderItems.name',
+                    quantity: { $sum: '$orderItems.quantity' },
+                }
+            },
+            {
+                $sort: {
+                    quantity: -1
+                }
+            },
+            {
+                $limit: 1
+            },
+            {
+                $project: {
+                    _id: 0,
+                    name: '$_id',
+                    quantity: 1
+                }
+            }
+        ]);
+
+        const mostSoldSideDish = await orderModel.aggregate([
+            { $unwind: '$orderItems' },
+            { $match: { 'orderItems.category': 'Side' } },
+            {
+                $group: {
+                    _id: '$orderItems.name',
+                    quantity: { $sum: '$orderItems.quantity' },
+                }
+            },
+            {
+                $sort: {
+                    quantity: -1
+                }
+            },
+            {
+                $limit: 1
+            },
+            {
+                $project: {
+                    _id: 0,
+                    name: '$_id',
+                    quantity: 1
+                }
+            }
+        ]);
+
+        const famousFoods = {
+            mostSoldMainDish: mostSoldMainDish[0],
+            mostSoldSideDish: mostSoldSideDish[0]
+          }
+
+        return res.status(200).json({ message: 'Most sold Main dish retrieved successfully', data: famousFoods });
+    } catch (error) {
+        console.log(error);
+        return res.status(400).json({ message: error });
+    }
+});
+
 module.exports = router;

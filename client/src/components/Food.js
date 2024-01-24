@@ -15,6 +15,11 @@ export default function Food({ food }) {
     dispatch(addToCart(food, quentity));
   }
 
+  const handleQuantityChange = (event) => {
+    const newQuantity = parseInt(event.target.value, 10);
+    setquantity(isNaN(newQuantity) ? 1 : newQuantity);
+  };
+
   return (
     <div className="shadow-lg p-3 mb-5 bg-white rounded">
       <div onClick={handleShow}>
@@ -44,11 +49,9 @@ export default function Food({ food }) {
         </div>
 
         <div className="w-100 m-1">
-          <select
+        <select
             value={quentity}
-            onChange={(e) => {
-              setquantity(e.target.value);
-            }}
+            onChange={handleQuantityChange}
           >
             {[...Array(10).keys()].map((x, i) => {
               return <option value={i + 1}>{i + 1}</option>;
@@ -88,3 +91,4 @@ export default function Food({ food }) {
     </div>
   );
 }
+

@@ -11,6 +11,7 @@ import {
 import HomeScreen from "./screens/HomeScreen";
 import CartScreen from "./screens/CartScreen";
 import OrderScreen from "./screens/OrderScreen";
+import StatsScreen from "./screens/StatsScreen";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/" exact Component={HomeScreen} />
           <Route path="/cart" exact Component={CartScreen} />
           <Route path="/orders" exact Component={OrderScreen} />
+          <Route path="/stats" exact Component={StatsScreen} />
         </Routes>
       </BrowserRouter>
     </div>

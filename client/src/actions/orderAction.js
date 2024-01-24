@@ -30,3 +30,16 @@ export const getAllOrders = () => async dispatch => {
         dispatch({type:'GET_ORDERS_FAILED',payload:error});
     }
 }
+
+export const getFamousFoods = () => async dispatch => {
+
+    dispatch({type:'GET_FamousFoods_REQUEST'});
+
+    try {
+        const response = await axios.get('/api/orders/getfamousfood');
+        // console.log(response);
+        dispatch({type:'GET_FamousFoods_SUCCESS',payload:response.data});
+    } catch (error) {
+        dispatch({type:'GET_FamousFoods_FAILED',payload:error});
+    }
+}

@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Dropdown from "react-bootstrap/Dropdown";
 
 export default function Navbar() {
-
-  const cartstate = useSelector(state => state.cartReducer)
+  const cartstate = useSelector((state) => state.cartReducer);
 
   return (
     <div>
@@ -23,12 +23,22 @@ export default function Navbar() {
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse d-flex justify-content-end" id="navbarNav">
+        <div
+          className="collapse navbar-collapse d-flex justify-content-end"
+          id="navbarNav"
+        >
           <ul className="navbar-nav">
             <li className="nav-item active">
-              <a className="nav-link" href="#">
-                Dashboared
-              </a>
+              <Dropdown>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                  Menu
+                </Dropdown.Toggle>
+
+                <Dropdown.Menu>
+                  <Dropdown.Item href="/orders">Orders</Dropdown.Item>
+                  <Dropdown.Item href="/stats">Stats</Dropdown.Item>
+                </Dropdown.Menu>
+              </Dropdown>
             </li>
             <li className="nav-item">
               <a className="nav-link" href="/cart">

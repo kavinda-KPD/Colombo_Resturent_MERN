@@ -35,3 +35,22 @@ export const getAllOrderReducer = (state={orders:[]} , action) => {
         default: return state
     }
 }
+
+export const getFamousDishesReducer = (state={} , action) => {
+
+    switch (action.type) {
+        case 'GET_FamousFoods_REQUEST': return {
+            loading:true,
+            ...state
+        }
+        case 'GET_FamousFoods_SUCCESS': return {
+            loading:false,
+            famousFood : action.payload
+        }
+        case 'GET_FamousFoods_FAILED': return {
+            loading:false,
+            error : action.payload
+        }
+        default: return state
+    }
+}
