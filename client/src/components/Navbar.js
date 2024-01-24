@@ -27,7 +27,7 @@ export default function Navbar() {
           <ul className="navbar-nav">
             <li className="nav-item active">
               <a className="nav-link" href="#">
-                Login
+                Dashboared
               </a>
             </li>
             <li className="nav-item">

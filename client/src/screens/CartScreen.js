@@ -1,16 +1,19 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { placeOrder } from "../actions/orderAction";
 
 export default function CartScreen() {
  const cartstate = useSelector((state) => state.cartReducer);
  const cartItems = cartstate.cartItems;
+
+ const dispatch = useDispatch();
 
  function sendToKichen(){
     const sideItems = cartItems.filter(item => item.category === "Side");
     if (sideItems.length === 0) {
         alert("You can't send to kitchen. Please add Sub items also.");
     }else{
-        alert("Order Sent To the Kichen");
+        dispatch(placeOrder());
     }
  }
 

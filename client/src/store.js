@@ -3,10 +3,13 @@ import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { getAllFoodsReducers } from './reducers/foodReducers';
 import { cartReducer } from './reducers/cartReducer';
+import { placeOrderReducer } from './reducers/orderReducer';
+
 
 const finalReducer = combineReducers({
   getAllFoodsReducers: getAllFoodsReducers,
-  cartReducer:cartReducer
+  cartReducer:cartReducer,
+  placeOrderReducer:placeOrderReducer
 });
 
 const cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')): [];

@@ -9,7 +9,10 @@ app.use(express.json());
 app.use(cors());
 
 const foodsRoute = require('./routes/foodRoute');
+const ordersRoute = require('./routes/ordersRoute');
+
 app.use('/api/foods/',foodsRoute);
+app.use('/api/orders/',ordersRoute);
 
 app.get("/", (req, res) => {
     res.send("Server Working");
