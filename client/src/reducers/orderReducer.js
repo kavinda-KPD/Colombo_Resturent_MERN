@@ -54,3 +54,41 @@ export const getFamousDishesReducer = (state={} , action) => {
         default: return state
     }
 }
+
+export const getRevenueReducer = (state={} , action) => {
+
+    switch (action.type) {
+        case 'GET_REVENUE_REQUEST': return {
+            loading:true,
+            ...state
+        }
+        case 'GET_REVENUE_SUCCESS': return {
+            loading:false,
+            revenue : action.payload
+        }
+        case 'GET_REVENUE_FAILED': return {
+            loading:false,
+            error : action.payload
+        }
+        default: return state
+    }
+}
+
+export const getWeekRevenueReducer = (state={} , action) => {
+
+    switch (action.type) {
+        case 'GET_WEEK_REVENUE_REQUEST': return {
+            loading:true,
+            ...state
+        }
+        case 'GET_WEEK_REVENUE_SUCCESS': return {
+            loading:false,
+            wrevenue : action.payload
+        }
+        case 'GET_WEEK_REVENUE_FAILED': return {
+            loading:false,
+            error : action.payload
+        }
+        default: return state
+    }
+}

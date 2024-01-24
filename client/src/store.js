@@ -3,7 +3,7 @@ import {thunk} from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { getAllFoodsReducers } from './reducers/foodReducers';
 import { cartReducer } from './reducers/cartReducer';
-import { placeOrderReducer , getAllOrderReducer,getFamousDishesReducer } from './reducers/orderReducer';
+import { placeOrderReducer , getAllOrderReducer,getFamousDishesReducer, getRevenueReducer,getWeekRevenueReducer} from './reducers/orderReducer';
 
 
 const finalReducer = combineReducers({
@@ -11,7 +11,9 @@ const finalReducer = combineReducers({
   cartReducer:cartReducer,
   placeOrderReducer:placeOrderReducer,
   getAllOrderReducer:getAllOrderReducer,
-  getFamousDishesReducer:getFamousDishesReducer
+  getFamousDishesReducer:getFamousDishesReducer,
+  getRevenueReducer:getRevenueReducer,
+  getWeekRevenueReducer:getWeekRevenueReducer
 });
 
 const cartItems = localStorage.getItem('cartItems') ? JSON.parse(localStorage.getItem('cartItems')): [];
