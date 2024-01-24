@@ -14,6 +14,7 @@ app.get("/foods", (req, res) => {
         .then(docs => {
             res.send(docs);
         })
+        
         .catch(err => {
             console.log(err);
             res.status(500).send("Internal Server Error");
