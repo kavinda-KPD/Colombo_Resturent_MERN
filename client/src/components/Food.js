@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import Modal from "react-bootstrap/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import { addToCart } from "../actions/cartAction";
 
 export default function Food({ food }) {
   const [show, setShow] = useState(false);
@@ -8,10 +10,13 @@ export default function Food({ food }) {
 
   const [quentity, setquantity] = useState(1);
 
+  const dispatch = useDispatch();
+  function addtoCart() {
+    dispatch(addToCart(food, quentity));
+  }
+
   return (
-    <div
-      className="shadow-lg p-3 mb-5 bg-white rounded"
-    >
+    <div className="shadow-lg p-3 mb-5 bg-white rounded">
       <div onClick={handleShow}>
         <div className="flex-container">
           <div className="w-100">
@@ -53,7 +58,9 @@ export default function Food({ food }) {
       </div>
 
       <div className="m-1 w-100 d-flex justify-content-left">
-        <button className="btn">Add To Cart</button>
+        <button className="btn" onClick={addtoCart}>
+          Add To Cart
+        </button>
       </div>
 
       <Modal show={show}>
@@ -62,18 +69,20 @@ export default function Food({ food }) {
         </Modal.Header>
 
         <Modal.Body>
-        <img
-          src={food.image}
-          className="img-fluid"
-          alt=""
-          style={{ height: "400px"}}
-        />
+          <img
+            src={food.image}
+            className="img-fluid"
+            alt=""
+            style={{ height: "400px" }}
+          />
 
-        <p>{food.description}</p>
+          <p>{food.description}</p>
         </Modal.Body>
 
         <Modal.Footer>
-          <button className="btn" onClick={handleClose}>Close</button>
+          <button className="btn" onClick={handleClose}>
+            Close
+          </button>
         </Modal.Footer>
       </Modal>
     </div>
