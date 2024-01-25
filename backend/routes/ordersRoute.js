@@ -30,6 +30,7 @@ router.get("/getallorders", async (req, res) => {
   }
 });
 
+
 router.get("/getfamousfood", async (req, res) => {
   try {
     const mostSoldMainDish = await orderModel.aggregate([
@@ -200,6 +201,7 @@ router.get("/getrevenuedetails", async (req, res) => {
   }
 });
 
+//get week report
 router.get("/getweekrevenuedetails", async (req, res) => {
   try {
     const today = new Date();

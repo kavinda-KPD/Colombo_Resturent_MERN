@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router();
 const Food = require("../models/foodModel")
 
+//get All the foods
 router.get("/getallfoods",async(req,res) =>{
     try {
         const foods = await Food.find({});
@@ -12,3 +13,5 @@ router.get("/getallfoods",async(req,res) =>{
 })
 
 module.exports = router;
+
+
