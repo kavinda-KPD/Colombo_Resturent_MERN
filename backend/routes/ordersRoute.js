@@ -202,40 +202,50 @@ router.get("/getrevenuedetails", async (req, res) => {
 
 router.get("/getweekrevenuedetails", async (req, res) => {
   try {
-    const startDate = new Date();
-    startDate.setDate(startDate.getDate() - 7);
-    const endDate = new Date();
-    endDate.setHours(23, 59, 59, 999);
+    const today = new Date();
+    const sevenDaysAgo = new Date(today.getTime() - 7 * 24 * 60 * 60 * 1000);
 
-    const revenueDetails = {};
-    const currentDate = new Date(startDate);
-
-    for (let i = 0; i < 7; i++) {
-      revenueDetails[currentDate.toISOString().split('T')[0]] = { Main: 0, Side: 0, Dessert: 0 };
-      currentDate.setDate(currentDate.getDate() - 1);
-    }
-
-    const orders = await orderModel.find({
-      createdAt: { $gte: startDate, $lt: endDate },
-    });
-
-    orders.forEach((order) => {
-      if (revenueDetails[order.createdAt.toISOString().split('T')[0]]) {
-        order.orderItems.forEach((item) => {
-          if (revenueDetails[order.createdAt.toISOString().split('T')[0]][item.category]) {
-            revenueDetails[order.createdAt.toISOString().split('T')[0]][item.category] += item.price;
-          }
-          revenueDetails[order.createdAt.toISOString().split('T')[0]].totalPrice += item.price;
-        });
-      }
-    });
+    const weekRevenue = await orderModel.aggregate([
+      {
+        $match: {
+          createdAt: {
+            $gte: sevenDaysAgo,
+            $lt: today,
+          },
+        },
+      },
+      {
+        $unwind: "$orderItems",
+      },
+      {
+        $group: {
+          _id: {
+            date: { $dateToString: { format: "%Y-%m-%d", date: "$createdAt" } },
+            category: "$orderItems.category",
+          },
+          totalPrice: { $sum: "$orderItems.price" },
+        },
+      },
+      {
+        $group: {
+          _id: "$_id.date",
+          categories: {
+            $push: {
+              category: "$_id.category",
+              totalPrice: "$totalPrice",
+            },
+          },
+          totalPrice: { $sum: "$totalPrice" },
+        },
+      },
+    ]);
 
     return res
-      .status(200)
-      .json({
-        message: "Total price of items sold for each of the past 7 days",
-        data: revenueDetails,
-      });
+        .status(200)
+        .json({
+          message: "Weekly Revenue Details",
+          data: weekRevenue,
+        });
   } catch (error) {
     console.log(error);
     return res.status(400).json({ message: error });

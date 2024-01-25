@@ -2,6 +2,7 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllOrders } from "../actions/orderAction";
+import Card from "react-bootstrap/Card";
 
 export default function OrderScreen() {
   const dispatch = useDispatch();
@@ -33,31 +34,24 @@ export default function OrderScreen() {
         ) : (
           orders.map((order) => {
             return (
-              <div
-                className="m-2"
-                style={{
-                  backgroundColor: "grey",
-                  color: "white",
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <div className="flex-container">
-                  <div className="text-left w-100 m-1">
+              <>
+                <div className="row justify-content-center">
+                  <Card className="col-md-6 m-3">
+                    <Card.Body>
                     {order.orderItems.map((item, index) => {
-                      return (
-                        <div>
-                          <h1>
-                            {item.name} * {item.quantity}
-                          </h1>
-                        </div>
-                      );
-                    })}
-                 
-                  </div>
+                        return (
+                          <div>
+                            <h1>
+                              {item.name} * {item.quantity}
+                            </h1>
+                          </div>
+                        );
+                      })}
+                      Date: {order.createdAt}
+                    </Card.Body>
+                  </Card>
                 </div>
-              </div>
+              </>
             );
           })
         )}

@@ -99,17 +99,21 @@ export default function StatsScreen() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>1</td>
-          <td>Mark</td>
-          <td>Otto</td>
-          <td>@mdo</td>
-          <td>@mdo</td>
-        </tr>
-      </tbody>
+    {wrevenue.data && wrevenue.data.map((dayData, index) => (
+      <tr key={index}>
+        <td>{dayData._id}</td>
+        <td>{dayData.categories.find(c => c.category === "Main")?.totalPrice || 0}</td>
+        <td>{dayData.categories.find(c => c.category === "Side")?.totalPrice || 0}</td>
+        <td>{dayData.categories.find(c => c.category === "desert")?.totalPrice || 0}</td>
+        <td>{dayData.totalPrice}</td>
+      </tr>
+    ))}
+  </tbody>
     </Table>
-          </Card.Body>
-        </Card>
+    
+
+        </Card.Body>
+      </Card>
       </div>
     </div>
   );
