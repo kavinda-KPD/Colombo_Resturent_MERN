@@ -46,20 +46,20 @@ export default function StatsScreen() {
           <Card className="col-md-3 m-3">
             <Card.Body>
               <h1>Most famous main dish</h1>
-              {famousFood.data.mostSoldMainDish.name} :{" "}
-              {famousFood.data.mostSoldMainDish.quantity}
+              {famousFood && famousFood.data.mostSoldMainDish.name} :{" "}
+              {famousFood && famousFood.data.mostSoldMainDish.quantity}
             </Card.Body>
           </Card>
 
           <Card className="col-md-3 m-3">
             <Card.Body>
               <h1>Most famous side dish</h1>
-              {famousFood.data.mostSoldSideDish.name} :{" "}
-              {famousFood.data.mostSoldSideDish.quantity}
+              {famousFood && famousFood.data.mostSoldSideDish.name} :{" "}
+              {famousFood && famousFood.data.mostSoldSideDish.quantity}
               <p>
                 {" "}
-                {famousFood.data.topMainDish[0].name} is most going Main Dish
-                with {famousFood.data.mostSoldSideDish.name}
+                {famousFood && famousFood.data.topMainDish[0].name} is most going Main Dish
+                with {famousFood && famousFood.data.mostSoldSideDish.name}
               </p>
             </Card.Body>
           </Card>
@@ -77,9 +77,9 @@ export default function StatsScreen() {
         <Card className="col-md-3 m-3">
           <Card.Body>
             <h1>Today Revenue Category Wise</h1>
-            From Main dishes: Rs. {revenue.data.categoryTotals.Main} <br />
-            From Side dishes: Rs. {revenue.data.categoryTotals.Side} <br />
-            From Deserts: Rs. {revenue.data.categoryTotals.desert}
+            From Main dishes: Rs. {revenue && revenue.data.categoryTotals.Main} <br />
+            From Side dishes: Rs. {revenue && revenue.data.categoryTotals.Side} <br />
+            From Deserts: Rs. {revenue && revenue.data.categoryTotals.desert}
           </Card.Body>
         </Card>
       </div>
