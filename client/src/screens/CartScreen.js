@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { placeOrder } from "../actions/orderAction";
+import Card from "react-bootstrap/Card";
 
 export default function CartScreen() {
   const cartstate = useSelector((state) => state.cartReducer);
@@ -54,44 +55,65 @@ export default function CartScreen() {
   }
 
   return (
-    <div>
-      <div className="row justify-content-center">
-        <div className="col-md-6">
-          <h2>Selected Items</h2>
+      <div>
 
-          {cartItems.map((item) => {
-            return (
-              <div className="flex-container">
-                <div className="text-left m-1">
-                  <h1>Name : {item.name}</h1>
-                  <h1>Quantity : {item.quantity}</h1>
-                  <hr />
-                </div>
+          <div
+              style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+              }}
+          >
+              <h2 style={{fontSize: "35px"}}>Order Cart Screen</h2>
+          </div>
 
-                <div className="m-20 w-100 justify-content-end">
-                  <img
-                    src={item.image}
-                    className="img-fluid"
-                    alt=""
-                    style={{ height: "80px", width: "80px" }}
-                  />
-                </div>
-              </div>
-            );
-          })}
-        </div>
+          <div className="row justify-content-center">
+              <Card className="col-md-3 m-3">
+                  <Card.Body>
+                      <h3 className="row justify-content-center">Selected Items</h3>
+                      <hr />
 
-        <div className="col-md -4">
-          <button className="btn" onClick={sendToKichen}>
-            Send To Kichen
-          </button>
-        </div>
-        <div className="col-md -4">
-          <button className="btn" onClick={clearCart}>
-            Clear Cart
-          </button>
-        </div>
+                      {cartItems.map((item) => {
+                          return (
+                              <div className="flex-container">
+                                  <div className="text-left m-1 w-50">
+                                      <h1>Name : {item.name}</h1>
+                                      <h1>Quantity : {item.quantity}</h1>
+                                      <hr/>
+                                  </div>
+
+                                  <div className="m-1 w-50 d-flex justify-content-end">
+                                      <img
+                                          src={item.image}
+                                          className="img-fluid"
+                                          alt=""
+                                          style={{height: "80px", width: "80px"}}
+                                      />
+                                  </div>
+                              </div>
+
+                          );
+                      })}
+
+                  </Card.Body>
+              </Card>
+
+              <Card className="col-md-3 m-3 border-0">
+                  <Card.Body>
+                      <h1>Navigate Buttons</h1>
+
+                      <button className="btn m-1" onClick={sendToKichen}>
+                          Send To Kichen
+                      </button>
+
+                      <button className="btn m-1" onClick={clearCart}>
+                          Clear Cart
+                      </button>
+
+                  </Card.Body>
+              </Card>
+          </div>
+
       </div>
-    </div>
   );
 }
